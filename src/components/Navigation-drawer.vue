@@ -16,7 +16,7 @@
           <v-list-item-title>ShiFuMi</v-list-item-title>
         </v-list-item-content>
       </v-list-item>
-      <v-list-item>
+      <v-list-item to="/infos">
         <v-list-item-icon>
           <v-icon>mdi-information-outline</v-icon>
         </v-list-item-icon>
@@ -38,10 +38,10 @@
       <v-list>
         <v-list-item link @click="swithDarkMode">
           <v-list-item-icon>
-            <v-icon>{{$vuetify.theme.dark?'mdi-brightness-5':'mdi-brightness-4'}}</v-icon>
+            <v-icon>{{ $vuetify.theme.dark ? "mdi-brightness-5" : "mdi-brightness-4" }}</v-icon>
           </v-list-item-icon>
           <v-list-item-content>
-            <v-list-item-title>Mode {{$vuetify.theme.dark?'claire':'sombre'}}</v-list-item-title>
+            <v-list-item-title>Mode {{ $vuetify.theme.dark ? "claire" : "sombre" }}</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
       </v-list>

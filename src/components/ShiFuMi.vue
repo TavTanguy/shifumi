@@ -26,7 +26,7 @@ export default Vue.extend({
   computed: {
     showWaitScreen() {
       if (this.store.statusParty === StatusParty.waitScreen) {
-        partyStartedStore.value = false;
+        if (partyStartedStore.value !== false) partyStartedStore.value = false;
         return true;
       }
       return false;

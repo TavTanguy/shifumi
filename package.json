@@ -1,6 +1,6 @@
 {
-  "name": "clientv5",
-  "version": "0.1.1",
+  "name": "shifumi",
+  "version": "0.1.2",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",

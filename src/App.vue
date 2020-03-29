@@ -23,6 +23,7 @@ import ShowError from "@/components/ShowError.vue";
 import partyStartedStore from "@/scripts/partyStartedStore";
 import NavigationDrawer from "@/components/Navigation-drawer.vue";
 export default Vue.extend({
+  name: "app",
   components: { Loading, ShowError, NavigationDrawer },
   data: () => ({
     showBtnQuit: partyStartedStore,
