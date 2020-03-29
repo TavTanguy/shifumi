@@ -2,9 +2,7 @@
   <v-navigation-drawer :value="value" @input="emitInput" app temporary>
     <v-list-item>
       <v-list-item-content>
-        <v-list-item-title class="title">
-          Small Web Games
-        </v-list-item-title>
+        <v-list-item-title class="title">Small Web Games</v-list-item-title>
       </v-list-item-content>
     </v-list-item>
     <v-divider />
@@ -35,6 +33,19 @@
         </v-list-item-content>
       </v-list-item>
     </v-list>
+
+    <template slot="append">
+      <v-list>
+        <v-list-item link @click="swithDarkMode">
+          <v-list-item-icon>
+            <v-icon>{{$vuetify.theme.dark?'mdi-brightness-5':'mdi-brightness-4'}}</v-icon>
+          </v-list-item-icon>
+          <v-list-item-content>
+            <v-list-item-title>Mode {{$vuetify.theme.dark?'claire':'sombre'}}</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+      </v-list>
+    </template>
   </v-navigation-drawer>
 </template>
 
@@ -47,7 +58,15 @@ export default Vue.extend({
   methods: {
     emitInput(value: boolean) {
       this.$emit("input", value);
+    },
+    swithDarkMode() {
+      this.$vuetify.theme.dark = !this.$vuetify.theme.dark;
+      localStorage.setItem("darkMode", this.$vuetify.theme.dark + "");
     }
+  },
+  mounted() {
+    const modeDark = localStorage.getItem("darkMode");
+    if (modeDark) this.$vuetify.theme.dark = /true/.test(modeDark);
   }
 });
 </script>

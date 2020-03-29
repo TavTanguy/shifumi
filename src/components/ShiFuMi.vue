@@ -13,6 +13,7 @@ import WaitScreen from "./WaitScreen.vue";
 import SelectCard from "./SelectCard.vue";
 import ShowResult from "./ShowResult.vue";
 import connection from "../scripts/Connection";
+import partyStartedStore from "../scripts/partyStartedStore";
 export default Vue.extend({
   components: {
     WaitScreen,
@@ -24,7 +25,11 @@ export default Vue.extend({
   }),
   computed: {
     showWaitScreen() {
-      return this.store.statusParty === StatusParty.waitScreen;
+      if (this.store.statusParty === StatusParty.waitScreen) {
+        partyStartedStore.value = false;
+        return true;
+      }
+      return false;
     },
     showSelectCard() {
       if (this.store.statusParty === StatusParty.selectCard) {

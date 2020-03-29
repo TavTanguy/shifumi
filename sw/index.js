@@ -4,7 +4,11 @@ const appInfo = {
   publicFiles: []
 };
 /* End For errors */ appInfo.publicFiles.push(
-  ...["https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900", "https://cdn.jsdelivr.net/npm/@mdi/font@latest/css/materialdesignicons.min.css"]
+  ...[
+    "https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900",
+    "https://cdn.jsdelivr.net/npm/@mdi/font@latest/css/materialdesignicons.min.css",
+    "https://cdn.jsdelivr.net/npm/@mdi/font@latest/fonts/materialdesignicons-webfont.woff2?v=5.0.45"
+  ]
 );
 
 const nameCache = `${appInfo.name}-${appInfo.version}`;
@@ -13,7 +17,15 @@ async function fromCache(request) {
   const cache = await caches.open(nameCache);
   const matching = await cache.match(request);
   if (matching) return matching;
-  if (new URL(request.url).pathname === "/") return fromCache(request.url + "index.html");
+  try {
+    const url = new URL(request.url);
+    if (url.pathname === "/" || url.pathname === "/noInternet") {
+      url.pathname = "/index.html";
+      return fromCache(url);
+    }
+  } catch (err) {
+    throw new Error("no match");
+  }
 
   throw new Error("no match");
 }
